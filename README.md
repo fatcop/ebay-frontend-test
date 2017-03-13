@@ -4,7 +4,7 @@
 ## Foreword
 
 * Build tool: Webpack v2
-* App JS written in ES6, transpiled using Babel.
+* App JS written in ReactJS & ES6, transpiled using Babel.
 * CSS: Styles written in SASS with automatic autoprefixer on generated CSS.
 * Routing: Have implemented simple push state for browser history.
 * Minifiers for both JS and CSS
