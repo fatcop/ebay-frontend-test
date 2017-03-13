@@ -7,9 +7,9 @@
 * App JS written in ES6, transpiled using Babel.
 * CSS: Styles written in SASS with automatic autoprefixer on generated CSS.
 * Routing: Have implemented simple push state for browser history.
-* Minifiers for both JS and CSS: prod only
-* Sourcemaps for JS/CSS: dev only
-* Digest on JS and CSS bundle files names for cache busting: prod only
+* Minifiers for both JS and CSS
+* Sourcemaps for JS/CSS
+* Digest on JS and CSS bundle files names for cache busting (currently not working)
 * Server side rendering
 
 ## Getting started
