@@ -1,0 +1,187 @@
+$textColor: #333;
+$errorTextColor: red;
+$titleColor: #000;
+$bgColor: #fff;
+$baseFontSize: 14px;
+$baseFontFamily: arial, Sans-Serif;
+$boxBorderRadiusTop: 10px;
+$boxBorderRadiusBottom: 5px;
+$maxWidgetWidth: 724px;
+$linkColor: #508d16;
+$linkHoverColor: darken(#508d16, 10%);
+$transitionTime: 150ms;
+$transitionStyle: linear;
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: $baseFontFamily;
+  font-size: $baseFontSize;
+  color: $textColor;
+  background: $bgColor;
+}
+a {
+  color: $linkColor;
+  &:hover {
+    color: $linkHoverColor;
+  }
+}
+.error {
+	position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  color: $errorTextColor;
+  font-size: 2em;
+  text-align: center;
+}
+.widget {
+  margin: 0 auto;
+  max-width: $maxWidgetWidth;
+  transition: all $transitionTime $transitionStyle;
+  border-radius: $boxBorderRadiusTop $boxBorderRadiusTop $boxBorderRadiusBottom $boxBorderRadiusBottom;
+  box-shadow: 3px 3px 7px 1px rgba(0,0,0,0.10);
+  &:not(.collapsed) {
+    border-bottom: 1px solid #e6e7df;
+  }
+  &.navigating {
+    .widget-body, .widget-footer {
+      opacity: 0;
+      transition: all $transitionTime $transitionStyle;
+    }
+  }
+  &.collapsed {
+    &, .widget-header {
+      border-radius: $boxBorderRadiusTop $boxBorderRadiusTop $boxBorderRadiusTop $boxBorderRadiusTop;
+    }
+  }
+}
+.widget-icon {
+  height: 19px;
+  width: 15px;
+  vertical-align: bottom;
+  g {
+    fill: $linkColor;
+  }
+}
+.widget-header {
+  background: linear-gradient(to right, #ecead3, #c7c7a5);
+  border-radius: $boxBorderRadiusTop $boxBorderRadiusTop 0 0;
+  &:hover {
+    background: linear-gradient(to right, darken(#ecead3, 5%), darken(#c7c7a5, 5%));
+  }
+  .collapse-title {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: $titleColor;
+    font-weight: bold;
+  }
+  .collapse-icon {
+    float: right;
+    font-size: 0.5em;
+    vertical-align: middle;
+    line-height: 2.5em;
+  }
+}
+.widget-body {
+  overflow: hidden;
+  transition: height $transitionTime $transitionStyle;
+  .inner {
+    width: 100%;
+    @media(min-width: 600px) {
+      display: table;
+    }
+  }
+  .media-left {
+    vertical-align: top;
+    padding: 15px 5px 15px 30px;
+    @media(min-width: 600px) {
+      display: table-cell;
+      width: 245px;
+    }
+  }
+  .thumbnail {
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .description {
+    vertical-align: top;
+    padding: 15px;
+    font-size: 0.8rem;
+    @media(min-width: 600px) {
+      display: table-cell;
+    }
+  }
+}
+.widget-footer {
+  border-top: 1px solid #e6e7df;
+  display: table;
+  width: 100%;
+  border-radius: 0 0 $boxBorderRadiusBottom $boxBorderRadiusBottom;
+  clear: both;
+}
+.nav-block {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 15px;
+  a {
+    display: table;
+  }
+  .arrow-nav {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .text {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  &.previous {
+    width: 6em;
+    text-align: left;
+    .arrow-nav {
+      padding-right: 1em;
+    }
+  }
+  &.next {
+    text-align: right;
+    float: right;
+    .arrow-nav {
+      padding-left: 1em;
+    }
+  }
+}
+.arrow-up {
+  display: inline-block;
+  vertical-align: middle;
+  border-left: 1em solid transparent;
+  border-right: 1em solid transparent;
+  border-bottom: 1em solid $linkColor;
+}
+.arrow-down {
+  display: inline-block;
+  vertical-align: middle;
+  border-left: 1em solid transparent;
+  border-right: 1em solid transparent;
+  border-top: 1em solid $linkColor;
+}
+.arrow-right {
+  display: inline-block;
+  vertical-align: middle;
+  border-top: 1em solid transparent;
+  border-bottom: 1em solid transparent;
+  border-left: 1em solid $linkColor;
+}
+.arrow-left {
+  display: inline-block;
+  vertical-align: middle;
+  border-top: 1em solid transparent;
+  border-bottom: 1em solid transparent; 
+  border-right: 1em solid $linkColor; 
+}
