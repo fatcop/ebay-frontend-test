@@ -6,35 +6,37 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const assetPath = 'assets';
+const toAssetPath = dir => isProduction ? path.join(dir, assetPath) : dir;
 
-const productionPluginDefine = isProduction ? [
+const clientPlugins = isProduction ? [
   new webpack.DefinePlugin({'process.env': {
     'NODE_ENV': JSON.stringify('production'),
-    serverRendering: true
+  },
+  global_config: {
+    serverRendering: false,
+    assetBaseDir: JSON.stringify('')
   }})
+  // new webpack.optimize.DedupePlugin(),
+  // new webpack.optimize.OccurrenceOrderPlugin(),
+  // ,new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }, sourceMap: false })
 ] : [
-  new webpack.DefinePlugin({'process.env': {
-    serverRendering: false
+  new webpack.DefinePlugin({ CONFIG: {
+    serverRendering: false,
+    assetBaseDir: JSON.stringify('')
   }})
-  
 ];
 
-const clientPlugins = isProduction ? productionPluginDefine.concat([
+const serverPlugins = isProduction ? [
   // new webpack.optimize.DedupePlugin(),
   // new webpack.optimize.OccurrenceOrderPlugin(),
-  // new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }, sourceMap: false })
-]) : [];
-
-const serverPlugins = isProduction ? productionPluginDefine.concat([
-  // new webpack.optimize.DedupePlugin(),
-  // new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({ compress: false, sourceMap: true })
-  ,new ExtractTextPlugin({
+  new webpack.optimize.UglifyJsPlugin({ compress: false, sourceMap: true }),
+  new ExtractTextPlugin({
     filename: 'assets/app.css',
     disable: false,
     allChunks: true
   })
-]) : [];
+] : [];
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
@@ -111,7 +113,7 @@ const config = [
     ],
     output: {
       publicPath: '/',
-      path: path.join(distPath, 'assets'),
+      path: toAssetPath(distPath),
       filename: 'bundle.js',
       sourceMapFilename: 'bundle.js.map'
     },
@@ -146,7 +148,7 @@ const config = [
         }
       ])
       ,new ExtractTextPlugin({
-        filename: 'assets/app.css',
+        filename: 'app.css',
         disable: false,
         allChunks: true
       })

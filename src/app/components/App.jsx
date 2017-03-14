@@ -1,6 +1,6 @@
 import React from 'react';
 import Widget from './Widget';
-import { generateSlug, setRoutePath, getRoutePath, checkStatus, parseJSON} from '../helpers';
+import { generateSlug, setRoutePath, getRoutePath, checkStatus, parseJSON, assetUrl } from '../helpers';
 import '../styles/app.scss';
 
 const navigationDelay = 150;
@@ -16,7 +16,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      serverRendering:  process.env.serverRendering,
+      // TODO: Using global var. Also for server side rendering CONFIG not available, so hardcode.
+      serverRendering: typeof CONFIG === 'undefined' || typeof CONFIG.serverRendering === 'undefined' || CONFIG.serverRendering,
       loading: false,
       navigating: false,
       data: null,
@@ -29,7 +30,7 @@ export default class App extends React.Component {
 
     this.setState({ data: null, loading: true });
 
-    fetch('assets/content.json')
+    fetch(assetUrl('content.json'))
       .then(checkStatus)
       .then(response => response.json())
       .then(json => {

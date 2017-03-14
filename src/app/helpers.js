@@ -25,3 +25,10 @@ export function checkStatus(response) {
     throw error;
   }
 }
+
+export function assetUrl(url) {
+  // TODO: use of global var set in webpack config
+  // TODO: for server side, CONFIG from webpack config is not available, so set hardcoded values.
+  return (typeof CONFIG === 'undefined' || typeof CONFIG.assetBaseDir === 'undefined' ? 'assets' + '/' : '') + url;
+}
+

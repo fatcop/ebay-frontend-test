@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BoxIcon } from './Icons';
+import { assetUrl } from '../helpers';
 
 const CollapseTitle = (props) => {
   return (
@@ -89,7 +90,7 @@ export default class Widget extends React.Component {
             <div className="widget-content" onLoad={onImageLoad}> {/* Catch any bubbled image async onload events */}
               { content.thumbnail && 
                 <div className="media-left">
-                  <img className="thumbnail" src={'assets/'+content.thumbnail} alt="Thumbnail image"/>
+                  <img className="thumbnail" src={assetUrl(content.thumbnail)} alt="Thumbnail image"/>
                 </div>
               }
               <div className="description" dangerouslySetInnerHTML={description}></div>
